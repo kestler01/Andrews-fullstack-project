@@ -16,6 +16,7 @@ const {
 } = require('../../lib/custom_errors')
 
 const User = require('../models/user')
+// const piece = require('../models/piece')
 
 // passing this as a second argument to `router.<verb>` will make it
 // so that a token MUST be passed for that route to be available
@@ -43,6 +44,7 @@ router.post('/sign-up', (req, res, next) => {
     .then(hash => {
       // return necessary params to create a user
       return {
+        userName: req.body.credentials.userName,
         email: req.body.credentials.email,
         hashedPassword: hash
       }
@@ -134,6 +136,20 @@ router.delete('/sign-out', requireToken, (req, res, next) => {
   // save the token and respond with 204
   req.user.save()
     .then(() => res.sendStatus(204))
+    .catch(next)
+})
+
+router.patch('/update-profile', requireToken, (req, res, next) => {
+  User.findById(req.user._id)
+    .then(user => {
+      const { mediums, bio, userName } = req.body.user
+      if (mediums !== '') { user.mediums = mediums }
+      if (bio !== '') { user.bio = bio }
+      if (userName !== '') { user.userName = userName }
+      return user.save()
+    }
+    )
+    .then(user => res.status(200).json({ user }))
     .catch(next)
 })
 

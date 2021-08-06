@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema(
   {
     userName: {
       type: String,
+      unique: true,
       required: true
     },
     // firstName: {   reeling myself in and keeping v1 simpler
@@ -25,7 +26,7 @@ const userSchema = new mongoose.Schema(
     mediums: String,
     bio: String,
     token: String,
-    pieces: [] // will fill with references to art pieces or should they be sub docs ...
+    pieces: [] // will fill with references to art pieces or should they be sub docs ... ?
     // memberSince: Date,
     // website: String,
     // phoneNumber: String,
@@ -44,10 +45,6 @@ const userSchema = new mongoose.Schema(
   }
 )
 
-userSchema.virtual('info')
-  .get(function () {
-    return `${this.medium} ${this.bio}`
-  })
 //    vVVv wont work, dates have to be subtracted differently than numbers
 // memberSchema.virtual('accountAge').get(function () {
 //   const currentTime = new Date()
