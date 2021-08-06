@@ -10,10 +10,10 @@ const bcrypt = require('bcrypt')
 const bcryptSaltRounds = 10
 
 // pull in error types and the logic to handle them and set status codes
-const errors = require('../../lib/custom_errors')
-
-const BadParamsError = errors.BadParamsError
-const BadCredentialsError = errors.BadCredentialsError
+const {
+  BadParamsError,
+  BadCredentialsError
+} = require('../../lib/custom_errors')
 
 const User = require('../models/user')
 
@@ -22,7 +22,6 @@ const User = require('../models/user')
 // it will also set `res.user`
 const requireToken = passport.authenticate('bearer', { session: false })
 
-// instantiate a router (mini app that only handles routes)
 const router = express.Router()
 
 // SIGN UP

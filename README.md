@@ -1,3 +1,8 @@
+
+MAY NEED TO UPDATE NODE TO 16.2.0 and NPM to 7.13.0 in package.json!
+will have to remove the package lock and run npm install again. 
+
+
 # Full Stack Project Practice
 
 Be prepared to discuss these items with a consultant during a 1 on 1.

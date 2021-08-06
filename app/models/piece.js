@@ -1,14 +1,16 @@
 const mongoose = require('mongoose')
 
-const exampleSchema = new mongoose.Schema({
-  title: {
+const pieceSchema = new mongoose.Schema({
+  link: String,
+  name: {
     type: String,
     required: true
   },
-  text: {
+  medium: {
     type: String,
     required: true
   },
+  description: String,
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -18,4 +20,4 @@ const exampleSchema = new mongoose.Schema({
   timestamps: true
 })
 
-module.exports = mongoose.model('Example', exampleSchema)
+module.exports = mongoose.model('Piece', pieceSchema)

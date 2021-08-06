@@ -1,25 +1,64 @@
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true
+const userSchema = new mongoose.Schema(
+  {
+    userName: {
+      type: String,
+      required: true
+    },
+    // firstName: {   reeling myself in and keeping v1 simpler
+    //   type: String,
+    //   required: true
+    // },
+    // lastName: {
+    //   type: String,
+    //   required: true
+    // },
+    email: {
+      type: String,
+      required: true
+    },
+    hashedPassword: {
+      type: String,
+      required: true
+    },
+    mediums: String,
+    bio: String,
+    token: String,
+    pieces: [] // will fill with references to art pieces or should they be sub docs ...
+    // memberSince: Date,
+    // website: String,
+    // phoneNumber: String,
+    // address: String
   },
-  hashedPassword: {
-    type: String,
-    required: true
-  },
-  token: String
-}, {
-  timestamps: true,
-  toObject: {
-    // remove `hashedPassword` field when we call `.toObject`
-    transform: (_doc, user) => {
-      delete user.hashedPassword
-      return user
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (_doc, user) => {
+        delete user.hashedPassword
+        delete user.email
+        return user
+      }
     }
   }
-})
+)
 
+userSchema.virtual('info')
+  .get(function () {
+    return `${this.medium} ${this.bio}`
+  })
+//    vVVv wont work, dates have to be subtracted differently than numbers
+// memberSchema.virtual('accountAge').get(function () {
+//   const currentTime = new Date()
+//   return (currentTime - this.createdAt)
+// })
+// memberSchema.virtual('fullName')
+//   .get(function () {
+//     return `${this.firstName} ${this.lastName}`
+//   })
+// memberSchema.virtual('contact')
+//   .get(function () {
+//     return (` name:${fullName}, email:${email}, phone#:${phoneNumber}, address:${address} `)
+//   })
 module.exports = mongoose.model('User', userSchema)
