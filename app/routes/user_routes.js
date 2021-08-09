@@ -44,7 +44,7 @@ router.post('/sign-up', (req, res, next) => {
     .then(hash => {
       // return necessary params to create a user
       return {
-        userName: req.body.credentials.userName,
+        userName: req.body.credentials.user_name,
         email: req.body.credentials.email,
         hashedPassword: hash
       }
@@ -141,15 +141,14 @@ router.delete('/sign-out', requireToken, (req, res, next) => {
 
 router.patch('/update-profile', requireToken, (req, res, next) => {
   User.findById(req.user._id)
-    .then(user => {
+    .then((user) => {
       const { mediums, bio, userName } = req.body.user
-      if (mediums !== '') { user.mediums = mediums }
-      if (bio !== '') { user.bio = bio }
-      if (userName !== '') { user.userName = userName }
+      user.mediums = mediums
+      user.bio = bio
+      user.userName = userName
       return user.save()
-    }
-    )
-    .then(user => res.status(200).json({ user }))
+    })
+    .then((user) => res.status(200).json({ user: user.toObject() }))
     .catch(next)
 })
 

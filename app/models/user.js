@@ -1,3 +1,4 @@
+const { Schema } = require('mongoose')
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema(
@@ -26,7 +27,8 @@ const userSchema = new mongoose.Schema(
     mediums: String,
     bio: String,
     token: String,
-    pieces: [] // will fill with references to art pieces or should they be sub docs ... ?
+    pieces: [{ type: Schema.Types.ObjectId, ref: 'Piece' }], // will fill with references to art pieces
+    shows: [{ type: Schema.Types.ObjectId, ref: 'Show' }]
     // memberSince: Date,
     // website: String,
     // phoneNumber: String,
@@ -34,7 +36,7 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    toJSON: {
+    toObject: {
       virtuals: true,
       transform: (_doc, user) => {
         delete user.hashedPassword

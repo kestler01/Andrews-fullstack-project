@@ -13,7 +13,7 @@ const showSchema = new mongoose.Schema(
     },
     description: String,
     isPrivate: Boolean,
-    pieces: [],
+    pieces: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Piece' }],
     likes: Number,
     comments: []
   },

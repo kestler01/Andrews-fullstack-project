@@ -9,6 +9,8 @@ const {
 
 const Piece = require('../models/piece')
 
+const User = require('../models/user')
+
 const requireToken = passport.authenticate('bearer', { session: false })
 
 const router = express.Router()
@@ -19,8 +21,14 @@ const router = express.Router()
 router.post('/pieces', requireToken, (req, res, next) => {
   const pieceData = req.body.piece
   pieceData.owner = req.user._id
+  let thisPiece
   Piece.create(pieceData)
-    .then((piece) => res.status(201).json({ piece }))
+    .then((piece) => {
+      thisPiece = piece;
+      ((req.user.pieces).push(piece._id))
+      return req.user.save()
+    })
+    .then(() => res.status(201).json({ thisPiece }))
     .catch(next)
 })
 
