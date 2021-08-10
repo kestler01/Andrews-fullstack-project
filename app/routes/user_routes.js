@@ -16,6 +16,7 @@ const {
 } = require('../../lib/custom_errors')
 
 const User = require('../models/user')
+const piece = require('../models/piece')
 // const piece = require('../models/piece')
 
 // passing this as a second argument to `router.<verb>` will make it
@@ -90,6 +91,10 @@ router.post('/sign-in', (req, res, next) => {
         // this will send back 401 and a message about sending wrong parameters
         throw new BadCredentialsError()
       }
+    })
+    .then(user => {
+      user.populate('pieces')
+      return user
     })
     .then(user => {
       // return status 201, the email, and the new token
