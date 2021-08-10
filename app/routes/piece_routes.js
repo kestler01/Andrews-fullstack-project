@@ -21,14 +21,14 @@ const router = express.Router()
 router.post('/pieces', requireToken, (req, res, next) => {
   const pieceData = req.body.piece
   pieceData.owner = req.user._id
-  let thisPiece
+  let piece
   Piece.create(pieceData)
-    .then((piece) => {
-      thisPiece = piece;
+    .then((thisPiece) => {
+      piece = thisPiece;
       ((req.user.pieces).push(piece._id))
       return req.user.save()
     })
-    .then(() => res.status(201).json({ thisPiece }))
+    .then(() => res.status(201).json({ piece }))
     .catch(next)
 })
 
