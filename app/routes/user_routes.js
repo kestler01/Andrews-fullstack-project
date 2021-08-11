@@ -93,7 +93,7 @@ router.post('/sign-in', (req, res, next) => {
       }
     })
     .then(user => {
-      user.populate('pieces')
+      user.populate('pieces') // not currently populating as desired: but didn't break anything so leaving in for now to be used/ fixed later
       return user
     })
     .then(user => {
