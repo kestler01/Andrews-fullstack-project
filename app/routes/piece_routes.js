@@ -9,7 +9,7 @@ const {
 
 const Piece = require('../models/piece')
 
-const User = require('../models/user')
+// const User = require('../models/user')
 
 const requireToken = passport.authenticate('bearer', { session: false })
 

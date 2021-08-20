@@ -16,7 +16,6 @@ const {
 } = require('../../lib/custom_errors')
 
 const User = require('../models/user')
-const piece = require('../models/piece')
 // const piece = require('../models/piece')
 
 // passing this as a second argument to `router.<verb>` will make it
