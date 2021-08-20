@@ -1,9 +1,14 @@
 ### ScreenShots of deployed app
 ![DeployedAppHomePage](./lib/public/Andrews-Deployed%20Art-Gallery-App.jpg)
-![Sign Up Form](./lib/public/Screen Shot 2021-08-20 at 6.21.39 PM.png)
-![Sign in Form](./lib/public/Screen Shot 2021-08-20 at 6.21.56 PM.png)
-![Create Piece Form](./lib/public/Screen Shot 2021-08-20 at 6.22.12 PM.png)
-![Gallery View](./lib/public/Screen Shot 2021-08-20 at 6.24.41 PM.png)
+
+![SignUpForm](./lib/public/Screen%20Shot%202021-08-20%20at%206.21.39%20PM.png)
+
+![SignInForm](./lib/public/Screen%20Shot%202021-08-20%20at%206.21.56%20PM.png)
+
+![CreatePieceForm](./lib/public/Screen%20Shot%202021-08-20%20at%206.22.12%20PM.png)
+
+![GalleryView](./lib/public/Screen%20Shot%202021-08-20%20at%206.24.41%20PM.png)
+
 ### Andrew's Art Blog:
 I wrote this application as a project for the General Assembly Software Engineering Immersive in Aug of 2021. The Objective is to develope a fullstack application to demonstrate how to use our class lessons and bring them together to create a SPA.
 This Art gallery app demonstrates a strong understanding of these idea's by allowing a user to create and edit art pieces which they upload after signing up, establishing a 1 to many relationship. These pieces are not visible to other users via authenticated routes and you must be signed in to use the app. 
